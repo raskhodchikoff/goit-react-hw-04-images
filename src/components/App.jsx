@@ -58,11 +58,15 @@ export const App = () => {
     updateGallery();
   }, [searchQuery, page]);
 
-  const onSubmit = searchQuery => {
-    setGallery([]);
-    setSearchQuery(searchQuery);
-    setLoading(true);
-    setPage(1);
+  const onSubmit = value => {
+    if (searchQuery !== value) {
+      setSearchQuery(value);
+      setGallery([]);
+      setLoading(true);
+      setPage(1);
+    } else {
+      return toast.error('Please enter a new request');
+    }
   };
 
   const onLoadMore = () => {
